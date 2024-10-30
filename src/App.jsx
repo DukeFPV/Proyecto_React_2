@@ -13,19 +13,22 @@ function App() {
   })
 
   function hadleChange(inputIdentifier, newValue) {
-    setUserInput(prevUserInput => {
+    setUserInput((prevUserInput) => {
       return {
         ...prevUserInput,
-        [inputIdentifier]: +newValue
-      }
-    })
+        [inputIdentifier]: +newValue,
+      };
+    });
   }
+
+  const inputIsValid = userInput.duration >= 1;
 
   return (
     <>
       <Header />
-      <UserInput userInput={userInput} onchange={hadleChange} />
-      <Results input={userInput} />
+      <UserInput userInput={userInput} onChange={hadleChange} />
+      {!inputIsValid && <p className='center'>Please enter a valid duration</p>}
+      {inputIsValid && <Results input={userInput} />}
     </>
   )
 }
